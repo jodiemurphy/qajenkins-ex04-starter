@@ -7,7 +7,8 @@ pipeline {
   stages {
     stage("Docker Build") {
       steps {
-        sh "echo 'Docker Build...'"
+        dockerImage = docker.build(registry)
+        dockerImage.tag("${env.BUILD_NUMBER}")
       }
     }
     stage("Scan Image") {
